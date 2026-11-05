@@ -22,7 +22,7 @@ export const services = [
   {
     title: 'Web and mobile apps',
     body: 'Fast, maintainable frontends, from internal dashboards to customer-facing products.',
-    tags: ['React', 'Vite', 'TanStack', 'RTK Query', 'React Native', 'Expo'],
+    tags: ['React', 'Vite', 'TanStack', 'Redux', 'React Native', 'Expo'],
   },
   {
     title: 'Messaging and bots',
