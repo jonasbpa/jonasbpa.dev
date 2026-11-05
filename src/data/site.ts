@@ -58,8 +58,8 @@ export type Project = {
 export const work: Project[] = [
   {
     name: 'ChatLabel',
-    kind: 'Omnichannel messaging SaaS',
-    body: 'Large-scale, high-availability customer service platform. I work across the .NET backend, the React frontend, channel workers in Node.js and Go (WhatsApp, WhatsApp Cloud API, Telegram, Facebook, Infobip) and the Kubernetes infrastructure behind it.',
+    kind: 'Omnichannel messaging SaaS · Hubcon',
+    body: 'Hubcon’s large-scale, high-availability customer service platform. I work across the .NET backend, the React frontend, channel workers in Node.js and Go (WhatsApp, WhatsApp Cloud API, Telegram, Facebook, Infobip) and the Kubernetes infrastructure behind it.',
     tags: ['.NET', 'React', 'Node.js', 'Go', 'k3s', 'Redis'],
   },
   {
@@ -109,7 +109,7 @@ export const products: Project[] = [
 ];
 
 export const experience = [
-  { company: 'ChatLabel', role: 'Full-stack Developer', period: 'Apr 2022 – present', note: 'Omnichannel SaaS, infrastructure and DevOps' },
+  { company: 'Hubcon', role: 'Full-stack Developer', period: 'Apr 2022 – present', note: 'ChatLabel omnichannel SaaS, infrastructure and DevOps' },
   { company: 'Spannel Soluções Integradas', role: 'Full-stack Developer', period: 'Dec 2021 – present', note: 'Web platforms, marketing tools and integrations' },
   { company: 'Loupen', role: 'IT Support Analyst', period: 'Mar 2020 – May 2023', note: '' },
   { company: 'TI Solutions', role: 'IT Support Analyst', period: 'Apr 2020 – Dec 2020', note: '' },
