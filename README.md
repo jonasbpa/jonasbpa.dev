@@ -1,6 +1,6 @@
 # jonasbpa.dev
 
-Personal site of Jonas Berchol. Static Astro site, deployed to Cloudflare Pages.
+Personal site of Jonas Berchol. Static Astro site, deployed to Cloudflare Workers (static assets).
 
 ## Develop
 
@@ -12,9 +12,10 @@ npm run build    # outputs dist/
 
 Content lives in `src/data/site.ts`.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers, static assets)
 
-- Framework preset: Astro
+Connected to GitHub in the Cloudflare dashboard; every push to `main` deploys.
+
 - Build command: `npm run build`
-- Output directory: `dist`
+- Deploy command: `npx wrangler deploy` (serves `dist/`, see `wrangler.jsonc`)
 - Environment variable: `NODE_VERSION=24`
