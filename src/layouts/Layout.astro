@@ -1,46 +1,46 @@
 ---
-import { profile } from '../data/site';
+import { content, htmlLang, langs, links, paths, type Lang } from '../data/site';
 import '../styles/global.css';
 
 interface Props {
-  title?: string;
-  description?: string;
+  lang: Lang;
 }
 
-const {
-  title = `${profile.name} · ${profile.role}`,
-  description = `${profile.role} working with ${profile.tagline.replace(/\.$/, '')} ${profile.availability}.`,
-} = Astro.props;
+const { lang } = Astro.props;
+const { title, description } = content[lang].meta;
 
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const canonical = new URL(paths[lang], Astro.site);
 const image = new URL('/avatar.jpg', Astro.site);
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: profile.name,
-  jobTitle: profile.role,
-  url: profile.site,
+  name: links.name,
+  jobTitle: content[lang].hero.role.replace(/\.$/, ''),
+  url: links.site,
   image: image.href,
-  email: `mailto:${profile.email}`,
+  email: `mailto:${links.email}`,
   address: { '@type': 'PostalAddress', addressLocality: 'Curitiba', addressCountry: 'BR' },
-  sameAs: [profile.github, profile.linkedin],
+  sameAs: [links.github, links.linkedin],
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {langs.map((l) => <link rel="alternate" hreflang={htmlLang[l]} href={new URL(paths[l], Astro.site)} />)}
+    <link rel="alternate" hreflang="x-default" href={new URL(paths.en, Astro.site)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="theme-color" content="#0e0f0c" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f6f5f0" media="(prefers-color-scheme: light)" />
 
     <meta property="og:type" content="profile" />
+    <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

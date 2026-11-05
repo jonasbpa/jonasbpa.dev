@@ -1,0 +1,521 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { content, links, paths, type Lang } from '../data/site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = content[lang];
+const other: Lang = lang === 'en' ? 'pt' : 'en';
+const mailto = `mailto:${links.email}?subject=${encodeURIComponent(t.contact.subject)}`;
+const year = new Date().getFullYear();
+---
+
+<Layout lang={lang}>
+  <header class="nav container">
+    <a href={paths[lang]} class="brand mono">jonasbpa<span>.dev</span></a>
+    <nav aria-label={lang === 'pt' ? 'Seções' : 'Sections'}>
+      <a href="#services">{t.nav.services}</a>
+      <a href="#work">{t.nav.work}</a>
+      <a href="#products">{t.nav.products}</a>
+      <a href="#experience">{t.nav.experience}</a>
+      <a href="#contact" class="nav-cta">{t.nav.contact}</a>
+      <a href={paths[other]} class="lang mono" hreflang={other === 'pt' ? 'pt-BR' : 'en'} lang={other === 'pt' ? 'pt-BR' : 'en'}>
+        {t.nav.switchLang}
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <div class="hero-text">
+        <p class="status mono"><span class="dot" aria-hidden="true"></span>{t.hero.availability}</p>
+        <h1>
+          {links.name}
+          <span class="role">{t.hero.role}</span>
+          <span class="tagline">{t.hero.tagline}</span>
+        </h1>
+        <p class="summary">{t.hero.summary}</p>
+        <div class="actions">
+          <a class="btn primary" href={mailto}>{t.hero.emailCta}</a>
+          <a class="btn" href={links.github} rel="me noopener" target="_blank">GitHub</a>
+          <a class="btn" href={links.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+        </div>
+        <p class="meta mono">{t.hero.meta}</p>
+      </div>
+      <img class="avatar" src="/avatar.jpg" alt={t.hero.avatarAlt} width="400" height="400" />
+    </section>
+
+    <section id="services" class="section container">
+      <p class="label">{t.services.label}</p>
+      <h2>{t.services.title}</h2>
+      <p class="lead">{t.services.lead}</p>
+      <div class="grid three">
+        {
+          t.services.items.map((s) => (
+            <article class="card">
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              <ul class="tags">
+                {s.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="work" class="section container">
+      <p class="label">{t.work.label}</p>
+      <h2>{t.work.title}</h2>
+      <div class="grid">
+        {
+          t.work.items.map((p) => (
+            <article class="card row">
+              <div class="row-head">
+                <h3>{p.name}</h3>
+                <p class="kind mono">{p.kind}</p>
+              </div>
+              <div>
+                <p>{p.body}</p>
+                <ul class="tags">
+                  {p.tags.map((tag) => (
+                    <li>{tag}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="products" class="section container">
+      <p class="label">{t.products.label}</p>
+      <h2>{t.products.title}</h2>
+      <div class="grid two">
+        {
+          t.products.items.map((p) => (
+            <article class="card">
+              <div class="card-top">
+                <p class="kind mono">{p.kind}</p>
+                {p.status && <p class="badge mono">{p.status}</p>}
+              </div>
+              <h3>
+                {p.href ? (
+                  <a href={p.href} target="_blank" rel="noopener">
+                    {p.name} <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  p.name
+                )}
+              </h3>
+              <p>{p.body}</p>
+              <ul class="tags">
+                {p.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="experience" class="section container">
+      <p class="label">{t.experience.label}</p>
+      <h2>{t.experience.title}</h2>
+      <div class="split">
+        <ol class="timeline">
+          {
+            t.experience.items.map((e) => (
+              <li>
+                <p class="period mono">{e.period}</p>
+                <div>
+                  <h3>{e.role}</h3>
+                  <p class="company">{e.company}</p>
+                  {e.note && <p class="note">{e.note}</p>}
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="education">
+          <p class="label">{t.experience.educationLabel}</p>
+          {
+            t.experience.education.map((e) => (
+              <div class="edu">
+                <h3>{e.degree}</h3>
+                <p class="company">{e.school}</p>
+                <p class="period mono">{e.period}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section container">
+      <div class="contact card">
+        <p class="label">{t.contact.label}</p>
+        <h2>{t.contact.title}</h2>
+        <p class="lead">{t.contact.lead}</p>
+        <a class="email mono" href={mailto}>{links.email}</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer mono">
+    <p>© {year} {links.name}</p>
+    <p>
+      <a href={links.github} rel="me noopener" target="_blank">GitHub</a> ·
+      <a href={links.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+    </p>
+  </footer>
+</Layout>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .brand {
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .brand span {
+    color: var(--accent);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.92rem;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--text);
+  }
+  nav a:not(.nav-cta):not(.lang) {
+    display: none;
+  }
+  @media (min-width: 720px) {
+    nav a:not(.nav-cta):not(.lang) {
+      display: inline;
+    }
+  }
+  nav .nav-cta {
+    color: var(--accent);
+  }
+  nav .lang {
+    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 8px;
+  }
+
+  .hero {
+    display: grid;
+    gap: 32px;
+    padding-top: 48px;
+    padding-bottom: 72px;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .hero {
+      grid-template-columns: 1fr 260px;
+      gap: 64px;
+      padding-top: 96px;
+      padding-bottom: 112px;
+    }
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 12px;
+    margin-bottom: 24px;
+  }
+  .dot {
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 4.2rem);
+    font-weight: 700;
+  }
+  h1 span {
+    display: block;
+  }
+  .role {
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .tagline {
+    font-size: 0.42em;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--accent);
+    margin-top: 16px;
+    font-family: var(--mono);
+  }
+  .summary {
+    margin-top: 24px;
+    max-width: 60ch;
+    color: var(--muted);
+    font-size: 1.08rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: border-color 0.15s;
+  }
+  .btn:hover {
+    border-color: var(--muted);
+  }
+  .btn.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  .meta {
+    margin-top: 24px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    order: -1;
+  }
+  @media (min-width: 860px) {
+    .avatar {
+      width: 260px;
+      height: 260px;
+      order: 0;
+    }
+  }
+
+  .section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+    border-top: 1px solid var(--border);
+  }
+  .section h2 {
+    font-size: clamp(1.7rem, 4vw, 2.3rem);
+    margin-top: 8px;
+  }
+  .lead {
+    margin-top: 12px;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+  .grid {
+    display: grid;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  @media (min-width: 720px) {
+    .grid.two,
+    .grid.three {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 980px) {
+    .grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .card h3 {
+    font-size: 1.15rem;
+  }
+  .card h3 a {
+    text-decoration: none;
+  }
+  .card h3 a:hover {
+    color: var(--accent);
+  }
+  .card p {
+    color: var(--muted);
+  }
+  .card .tags {
+    margin-top: auto;
+    padding-top: 4px;
+  }
+  .card.row {
+    display: grid;
+    gap: 12px;
+  }
+  .card.row > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .card.row {
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+    }
+  }
+  .row-head h3 {
+    font-size: 1.3rem;
+  }
+  .kind {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-top .kind {
+    margin: 0;
+  }
+  .card .badge {
+    font-size: 0.7rem;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 999px;
+    padding: 1px 8px;
+    white-space: nowrap;
+  }
+
+  .split {
+    display: grid;
+    gap: 40px;
+    margin-top: 32px;
+  }
+  @media (min-width: 860px) {
+    .split {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 64px;
+    }
+  }
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .timeline li {
+    display: grid;
+    gap: 4px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline li:first-child {
+    padding-top: 0;
+  }
+  @media (min-width: 720px) {
+    .timeline li {
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+    }
+  }
+  .timeline h3,
+  .edu h3 {
+    font-size: 1.05rem;
+  }
+  .period {
+    font-size: 0.78rem;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+  .company {
+    opacity: 0.85;
+  }
+  .note {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-top: 4px;
+  }
+  .edu {
+    margin-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact {
+    padding: 40px 24px;
+    align-items: flex-start;
+  }
+  @media (min-width: 720px) {
+    .contact {
+      padding: 56px;
+    }
+  }
+  .email {
+    margin-top: 12px;
+    font-size: clamp(1.05rem, 4.5vw, 1.6rem);
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    word-break: break-all;
+  }
+  .email:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .footer a {
+    text-decoration: none;
+  }
+  .footer a:hover {
+    color: var(--text);
+  }
+</style>
