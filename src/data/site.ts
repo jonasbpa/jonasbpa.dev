@@ -17,22 +17,22 @@ export const services = [
   {
     title: 'Backend and APIs',
     body: 'REST and WebSocket APIs, background jobs and third-party integrations that hold up under load.',
-    tags: ['NestJS', '.NET', 'Node.js', 'Socket.IO', 'BullMQ'],
+    tags: ['NestJS', '.NET', 'Node.js', 'Go', 'Python', 'Socket.IO', 'BullMQ', 'RabbitMQ'],
   },
   {
     title: 'Web and mobile apps',
     body: 'Fast, maintainable frontends, from internal dashboards to customer-facing products.',
-    tags: ['React', 'Vite', 'TanStack', 'React Native', 'Expo'],
+    tags: ['React', 'Vite', 'TanStack', 'RTK Query', 'React Native', 'Expo'],
   },
   {
     title: 'Messaging and bots',
-    body: 'WhatsApp, Telegram and Facebook channels, omnichannel inboxes, chatbots and automations.',
-    tags: ['WhatsApp Cloud API', 'Baileys', 'Telegram', 'Webhooks'],
+    body: 'WhatsApp, Telegram, Instagram and Facebook channels, omnichannel inboxes, chatbots and automations.',
+    tags: ['WhatsApp Cloud API', 'Baileys', 'Whatsmeow', 'Telegram', 'Instagram', 'Webhooks'],
   },
   {
     title: 'Infrastructure and DevOps',
     body: 'Containers, clusters, CI/CD pipelines and cloud setups you can actually operate.',
-    tags: ['Docker', 'Kubernetes', 'k3s', 'GitHub Actions', 'AWS', 'Azure', 'Cloudflare'],
+    tags: ['Docker', 'Docker Swarm', 'Kubernetes', 'k3s', 'GitHub Actions', 'AWS', 'Azure', 'Cloudflare'],
   },
   {
     title: 'Data',
@@ -40,9 +40,9 @@ export const services = [
     tags: ['PostgreSQL', 'MariaDB', 'MongoDB', 'Redis', 'Prisma', 'TypeORM'],
   },
   {
-    title: 'Rescue and maintenance',
-    body: 'Taking over legacy code, fixing what is on fire, upgrading stacks and paying down debt.',
-    tags: ['Refactoring', 'Performance', 'Migrations'],
+    title: 'Desktop and game tooling',
+    body: 'Native tools, overlays and game-server plugins, rooted in a technical degree in game programming.',
+    tags: ['C++', 'C#', 'Dear ImGui'],
   },
 ];
 
