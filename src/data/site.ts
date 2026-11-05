@@ -164,7 +164,7 @@ const en: Content = {
     ],
     educationLabel: '// education',
     education: [
-      { school: 'Federal University of Paraná (UFPR)', degree: 'B.Sc. in Information Management', period: '2020 – 2022' },
+      { school: 'Federal University of Paraná (UFPR)', degree: 'Information Management (not completed)', period: '2020 – 2022' },
       { school: 'Federal Institute of Paraná (IFPR)', degree: 'Technical degree in Digital Game Programming', period: '2016 – 2019' },
     ],
   },
@@ -276,7 +276,7 @@ const pt: Content = {
     ],
     educationLabel: '// formação',
     education: [
-      { school: 'Universidade Federal do Paraná (UFPR)', degree: 'Bacharelado em Gestão da Informação', period: '2020 – 2022' },
+      { school: 'Universidade Federal do Paraná (UFPR)', degree: 'Gestão da Informação (incompleto)', period: '2020 – 2022' },
       { school: 'Instituto Federal do Paraná (IFPR)', degree: 'Técnico em Programação de Jogos Digitais', period: '2016 – 2019' },
     ],
   },
