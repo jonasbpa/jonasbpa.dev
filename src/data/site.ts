@@ -6,7 +6,7 @@ export const profile = {
   location: 'Curitiba, Brazil',
   email: 'jbpa28@gmail.com',
   github: 'https://github.com/jonasbpa',
-  linkedin: 'https://www.linkedin.com/in/jonas-berchol-2648801a6/',
+  linkedin: 'https://www.linkedin.com/in/jonasbpa/',
   site: 'https://jonasbpa.dev',
   summary:
     'I build and run SaaS products end to end: APIs, real-time messaging, background queues, web and mobile frontends, and the Kubernetes clusters they run on. I have been writing code since I was nine and shipping production software since 2021.',
